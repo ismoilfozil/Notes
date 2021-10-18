@@ -1,0 +1,37 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.Notes" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/blue</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/textHintColor</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
+        <item name="android:statusBarColor" tools:targetApi="l">@color/transparent</item>
+        <!-- Customize your theme here. -->
+    </style>
+
+    <style name="Widget.Notes.Toolbar" parent="Widget.AppCompat.Toolbar">
+        <item name="android:background">@color/transparent</item>
+        <item name="popupTheme">@style/ThemeOverlay.AppCompat.Light</item>
+        <item name="titleTextAppearance">@style/TextAppearance.Notes.Toolbar</item>
+    </style>
+
+    <style name="Widget.Notes.FAB" parent="Widget.AppCompat.Toolbar">
+        <item name="android:background">@color/blue</item>
+        <item name="tint">@color/white</item>
+        <item name="titleTextAppearance">@style/TextAppearance.Notes.Toolbar</item>
+    </style>
+
+    <style name="Widget.Notes.EditText" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="android:gravity">start</item>
+        <item name="hintTextColor">@color/textHintColor</item>
+        <item name="backgroundTint">@color/white</item>
+        <item name="android:textColor">#CE000000</item>
+    </style>
+
+    <style name="TextAppearance.Notes.Toolbar" parent="TextAppearance.MaterialComponents.Headline4">
+        <item name="android:textSize">16sp</item>
+    </style>
+
+
+</resources>

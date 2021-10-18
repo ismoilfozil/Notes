@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/app_nav"
+    app:startDestination="@id/mainScreen">
+
+    <fragment
+        android:id="@+id/mainScreen"
+        android:name="uz.ismoil.notes.ui.screens.MainScreen"
+        android:label="Notes">
+        <action
+            android:id="@+id/action_mainScreen_to_createNoteScreen"
+            app:destination="@id/createNoteScreen" />
+        <action
+            android:id="@+id/action_mainScreen_to_archivedScreen"
+            app:destination="@id/archivedScreen" />
+
+        <action
+            android:id="@+id/action_mainScreen_to_trashScreen"
+            app:destination="@id/trashScreen" />
+        <action
+            android:id="@+id/action_mainScreen_to_readNoteScreen"
+            app:destination="@id/readNoteScreen" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/createNoteScreen"
+        android:name="uz.ismoil.notes.ui.screens.CreateNoteScreen"
+        android:label="New Note"/>
+    <fragment
+        android:id="@+id/archivedScreen"
+        android:name="uz.ismoil.notes.ui.screens.ArchivedScreen"
+        android:label="Archived Notes" />
+
+    <fragment
+        android:id="@+id/trashScreen"
+        android:name="uz.ismoil.notes.ui.screens.TrashScreen"
+        android:label="Trash" />
+    <fragment
+        android:id="@+id/readNoteScreen"
+        android:name="uz.ismoil.notes.ui.screens.ReadNoteScreen"
+        android:label="ReadNoteScreen" >
+        <argument
+            android:name="NoteEntity"
+            app:argType="uz.ismoil.notes.data.entities.NoteEntity" />
+        <action
+            android:id="@+id/action_readNoteScreen_to_editNoteScreen"
+            app:destination="@id/editNoteScreen"
+            app:popUpTo="@id/mainScreen"
+            app:popUpToInclusive="false" />
+    </fragment>
+    <fragment
+        android:id="@+id/editNoteScreen"
+        android:name="uz.ismoil.notes.ui.screens.EditNoteScreen"
+        android:label="EditNoteScreen" >
+        <argument
+            android:name="NoteEntity"
+            app:argType="uz.ismoil.notes.data.entities.NoteEntity" />
+    </fragment>
+</navigation>
