@@ -31,4 +31,13 @@ class NoteRepository @Inject constructor(
     fun getNotesByState(state: NoteState):LiveData<List<NoteEntity>>{
         return noteDao.getByState(state)
     }
+
+    suspend fun deleteAllTrashNotes(){
+        val state = NoteState.TRASH
+        noteDao.deleteAllTrashNotes(state)
+    }
+
+    fun searchDatabase(searchQuery: String, state: NoteState): LiveData<List<NoteEntity>> {
+        return noteDao.searchDatabase(searchQuery, state)
+    }
 }

@@ -3,6 +3,7 @@ package uz.ismoil.notes.ui.screens
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.*
+import android.widget.PopupMenu
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -15,9 +16,12 @@ import timber.log.Timber
 import uz.ismoil.notes.R
 import uz.ismoil.notes.data.entities.NoteEntity
 import uz.ismoil.notes.databinding.ScreenReadNoteBinding
+import uz.ismoil.notes.viewmodels.MainScreenViewModel
 import uz.ismoil.notes.viewmodels.ReadNoteScreenViewModel
+import uz.ismoil.notes.viewmodels.impl.MainScreenViewModelImpl
 import uz.ismoil.notes.viewmodels.impl.ReadNoteScreenViewModelImpl
 
+@AndroidEntryPoint
 class ReadNoteScreen : Fragment(R.layout.screen_read_note) {
 
 
@@ -39,35 +43,58 @@ class ReadNoteScreen : Fragment(R.layout.screen_read_note) {
     @SuppressLint("FragmentLiveDataObserve")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         viewModel.openEditScreenLiveData.observe(this, openEditScreenObserver)
+        viewModel.backLiveData.observe(this, backObserver)
 
         loadViews()
     }
 
-    private fun loadViews() {
+    private fun loadViews()  = binding.apply{
         val data = args.noteEntity
 //        toolbar = requireActivity().findViewById(R.id.mToolBar)
 //        toolbar?.setBackgroundResource(data.color)
-        binding.root.setBackgroundResource(data.color)
+        root.setBackgroundResource(data.color)
+        date.text = data.timestamp
+        titleText.text = data.title
+        contentText.text = data.text
 
-        binding.titleText.text = data.title
-        binding.contentText.text = data.text
-
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.read_menu, menu)
-        super.onCreateOptionsMenu(menu, inflater)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            R.id.edit_note -> {
-                viewModel.openEditScreen(args.noteEntity)
-                true
-            }
-            else -> super.onOptionsItemSelected(item)
+        btnBack.setOnClickListener {
+            navController.navigateUp()
         }
+
+        btnMore.setOnClickListener {
+            showMenu(it, data)
+        }
+
+        btnEdit.setOnClickListener {
+            viewModel.openEditScreen(data)
+        }
+
     }
+
+    private val backObserver = Observer<Unit>{
+        navController.navigateUp()
+    }
+
+    private fun showMenu(v:View, data:NoteEntity) {
+        val popupMenu = PopupMenu(context, v)
+        val inflater = popupMenu.menuInflater.inflate(R.menu.main_popup_menu, popupMenu.menu)
+        popupMenu.setOnMenuItemClickListener {
+            when(it.itemId){
+                R.id.deleteNote -> {
+                    viewModel.delete(data)
+                    return@setOnMenuItemClickListener  true
+                }
+                R.id.archiveNote -> {
+                    viewModel.archive(data)
+                    return@setOnMenuItemClickListener  true
+                }
+
+                else -> return@setOnMenuItemClickListener false
+            }
+        }
+        popupMenu.show()
+    }
+
 
     private val openEditScreenObserver = Observer<NoteEntity>{
         navController.navigate(ReadNoteScreenDirections.actionReadNoteScreenToEditNoteScreen(it))

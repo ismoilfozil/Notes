@@ -4,12 +4,16 @@ import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Filter
+import android.widget.Filterable
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import uz.ismoil.notes.data.entities.NoteEntity
 import uz.ismoil.notes.databinding.ItemNoteBinding
 import uz.ismoil.notes.models.Note
+import java.util.*
+import kotlin.collections.ArrayList
 
 class NoteAdapter() : ListAdapter<NoteEntity, NoteAdapter.NoteViewHolder>(NoteComparator) {
     private var onClickListener: ((NoteEntity) -> Unit)? = null
@@ -25,6 +29,7 @@ class NoteAdapter() : ListAdapter<NoteEntity, NoteAdapter.NoteViewHolder>(NoteCo
 
             binding.titleText.text = d.title
             binding.contentText.text = d.text
+            binding.textTime.text = d.timestamp
 
             binding.root.setOnClickListener {
                 onClickListener?.invoke(d)
@@ -56,6 +61,7 @@ class NoteAdapter() : ListAdapter<NoteEntity, NoteAdapter.NoteViewHolder>(NoteCo
     override fun onBindViewHolder(holder: NoteViewHolder, position: Int) = holder.bind()
 
 
+
     fun setOnItemClickListener(block: (NoteEntity) -> Unit) {
         onClickListener = block
     }
@@ -63,5 +69,6 @@ class NoteAdapter() : ListAdapter<NoteEntity, NoteAdapter.NoteViewHolder>(NoteCo
     fun setOnItemLongClickListener(block: (View, NoteEntity) -> Unit) {
         onClickLongListener = block
     }
+
 
 }

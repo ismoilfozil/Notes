@@ -21,4 +21,5 @@ interface MainScreenViewModel {
     fun deleteNote(note: NoteEntity)
 
     fun archiveNote(note: NoteEntity)
+    fun searchDatabase(searchQuery: String): LiveData<List<NoteEntity>>
 }

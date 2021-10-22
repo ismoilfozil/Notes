@@ -7,5 +7,5 @@ import uz.ismoil.notes.data.entities.NoteState
 interface EditNoteScreenViewModel {
     val backLiveData: LiveData<Unit>
 
-    fun updateNote(id:Long, title:String, text:String, color:Int, state:NoteState)
+    fun updateNote(id:Long, title:String, text:String,time:String, color:Int, state:NoteState)
 }

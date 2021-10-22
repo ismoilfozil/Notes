@@ -13,4 +13,6 @@
     <string name="archive">Archive</string>
     <string name="clear">Clear</string>
     <string name="search">Search</string>
+    <string name="restore">Restore</string>
+    <string name="unarchive">Unarchive</string>
 </resources>

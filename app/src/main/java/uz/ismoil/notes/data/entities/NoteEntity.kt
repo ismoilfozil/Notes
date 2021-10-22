@@ -20,8 +20,8 @@ data class NoteEntity(
     @DrawableRes
     val color: Int,
 
-    val timestamp: Long,
-    val pinned: Boolean,
+    val timestamp: String,
+    var pinned: Boolean,
     var state:NoteState
 
 ):Parcelable {

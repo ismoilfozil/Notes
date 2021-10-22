@@ -30,12 +30,20 @@
     <fragment
         android:id="@+id/archivedScreen"
         android:name="uz.ismoil.notes.ui.screens.ArchivedScreen"
-        android:label="Archived Notes" />
+        android:label="Archived Notes" >
+        <action
+            android:id="@+id/action_archivedScreen_to_readArchiveScreen"
+            app:destination="@id/readArchiveScreen" />
+    </fragment>
 
     <fragment
         android:id="@+id/trashScreen"
         android:name="uz.ismoil.notes.ui.screens.TrashScreen"
-        android:label="Trash" />
+        android:label="Trash" >
+        <action
+            android:id="@+id/action_trashScreen_to_readTrashScreen"
+            app:destination="@id/readTrashScreen" />
+    </fragment>
     <fragment
         android:id="@+id/readNoteScreen"
         android:name="uz.ismoil.notes.ui.screens.ReadNoteScreen"
@@ -55,6 +63,22 @@
         android:label="EditNoteScreen" >
         <argument
             android:name="NoteEntity"
+            app:argType="uz.ismoil.notes.data.entities.NoteEntity" />
+    </fragment>
+    <fragment
+        android:id="@+id/readTrashScreen"
+        android:name="uz.ismoil.notes.ui.screens.ReadTrashScreen"
+        android:label="ReadTrashScreen" >
+        <argument
+            android:name="Note"
+            app:argType="uz.ismoil.notes.data.entities.NoteEntity" />
+    </fragment>
+    <fragment
+        android:id="@+id/readArchiveScreen"
+        android:name="uz.ismoil.notes.ui.screens.ReadArchiveScreen"
+        android:label="ReadArchiveScreen" >
+        <argument
+            android:name="Note"
             app:argType="uz.ismoil.notes.data.entities.NoteEntity" />
     </fragment>
 </navigation>

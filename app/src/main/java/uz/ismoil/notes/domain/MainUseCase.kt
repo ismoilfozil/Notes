@@ -15,4 +15,7 @@ interface MainUseCase {
 
     fun archiveNote(noteEntity: NoteEntity):LiveData<Unit>
 
+    fun searchDatabase(searchQuery: String): LiveData<List<NoteEntity>>
+
 }
+

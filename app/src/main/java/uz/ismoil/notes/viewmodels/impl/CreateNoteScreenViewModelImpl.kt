@@ -16,9 +16,9 @@ class CreateNoteScreenViewModelImpl @Inject constructor(
 ) : CreateNoteScreenViewModel, ViewModel() {
     override val backLiveData = MediatorLiveData<Unit>()
 
-    override fun addNote(title: String, text: String, color: Int, state: NoteState) {
+    override fun addNote(title: String, text: String, time:String,color: Int, state: NoteState, pinned:Boolean) {
         val image = byteArrayOf()
-        val note = NoteEntity(0, title, text, image, color, System.currentTimeMillis(), false, state)
+        val note = NoteEntity(0, title, text, image, color, time, pinned, state)
 
         backLiveData.addSourceDisposable(createNoteUseCase.addNote(note)) {
             backLiveData.value = Unit

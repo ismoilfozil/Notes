@@ -3,6 +3,9 @@ package uz.ismoil.notes
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp
 import timber.log.Timber
+import java.io.InputStream
+import kotlin.math.max
+import kotlin.random.Random
 
 @HiltAndroidApp
 class App : Application() {
@@ -12,4 +15,5 @@ class App : Application() {
             Timber.plant(Timber.DebugTree())
         }
     }
+
 }
