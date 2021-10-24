@@ -26,13 +26,13 @@
             android:layout_height="match_parent"
             android:layout_weight="1"/>
 
-        <ImageButton
-            android:id="@+id/btnPin"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:padding="12dp"
-            android:background="?selectableItemBackgroundBorderless"
-            android:src="@drawable/ic_push_unpin"/>
+<!--        <ImageButton-->
+<!--            android:id="@+id/btnPin"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:padding="12dp"-->
+<!--            android:background="?selectableItemBackgroundBorderless"-->
+<!--            android:src="@drawable/ic_push_unpin"/>-->
 
         <ImageButton
             android:id="@+id/btnMenu"

@@ -26,7 +26,10 @@ import java.sql.Date
 import android.graphics.BitmapFactory
 
 import android.R.attr.data
+import android.inputmethodservice.Keyboard
+import android.inputmethodservice.KeyboardView
 import android.net.Uri
+import android.view.inputmethod.InputMethodManager
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.PopupMenu
@@ -83,6 +86,7 @@ class CreateNoteScreen : Fragment(R.layout.screen_create_note) {
 //        }
 
         binding.btnBack.setOnClickListener {
+            hideKeyboard(requireActivity())
             saveNote(NoteState.ACTIVE)
         }
 
@@ -91,12 +95,12 @@ class CreateNoteScreen : Fragment(R.layout.screen_create_note) {
         }
 
 
-        binding.btnPin.setOnClickListener {
-            isPinned = !isPinned
-            val image = it as ImageView
-            if (isPinned) image.setImageResource(R.drawable.ic_push_pin)
-            else image.setImageResource(R.drawable.ic_push_unpin)
-        }
+//        binding.btnPin.setOnClickListener {
+//            isPinned = !isPinned
+//            val image = it as ImageView
+//            if (isPinned) image.setImageResource(R.drawable.ic_push_pin)
+//            else image.setImageResource(R.drawable.ic_push_unpin)
+//        }
 
         lifecycleScope.launch {
             binding.titleText.textChanges {
@@ -140,6 +144,17 @@ class CreateNoteScreen : Fragment(R.layout.screen_create_note) {
             }
         }
         popupMenu.show()
+    }
+
+    private fun hideKeyboard(activity: Activity) {
+        val imm = activity.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+        //Find the currently focused view, so we can grab the correct window token from it.
+        var view = activity.currentFocus
+        //If no view currently has focus, create a new one, just so we can grab a window token from it
+        if (view == null) {
+            view = View(activity)
+        }
+        imm.hideSoftInputFromWindow(view.windowToken, 0)
     }
 
 

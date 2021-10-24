@@ -1,8 +1,10 @@
 package uz.ismoil.notes.ui.screens
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.os.Bundle
 import android.view.*
+import android.view.inputmethod.InputMethodManager
 import android.widget.PopupMenu
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -47,6 +49,7 @@ class EditNoteScreen : Fragment(R.layout.screen_edit_note) {
         binding.date.text = args.noteEntity.timestamp
 
         binding.btnBack.setOnClickListener {
+            hideKeyboard(requireActivity())
             saveNote(NoteState.ACTIVE)
         }
 
@@ -111,6 +114,18 @@ class EditNoteScreen : Fragment(R.layout.screen_edit_note) {
         val content = binding.contentText.text.toString()
         viewModel.updateNote(note.id, title, content, args.noteEntity.timestamp, R.color.background1, state)
     }
+
+    private fun hideKeyboard(activity: Activity) {
+        val imm = activity.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+        //Find the currently focused view, so we can grab the correct window token from it.
+        var view = activity.currentFocus
+        //If no view currently has focus, create a new one, just so we can grab a window token from it
+        if (view == null) {
+            view = View(activity)
+        }
+        imm.hideSoftInputFromWindow(view.windowToken, 0)
+    }
+
 
     override fun onDestroyView() {
         super.onDestroyView()
