@@ -31,8 +31,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         window.statusBarColor = ContextCompat.getColor(this, R.color.transparent)
-//        setSupportActionBar(binding.contentMain.mToolBar)
-
         navController = findNavController(R.id.navHostFragment)
 
         appBarConfiguration = AppBarConfiguration(navController.graph, binding.drawerLayout)

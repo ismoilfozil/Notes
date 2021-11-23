@@ -46,7 +46,6 @@ class ArchivedScreen : Fragment(R.layout.screen_archive), SearchView.OnQueryText
 
         val search = menu.findItem(R.id.searchNote)
         val searchView = search?.actionView as? androidx.appcompat.widget.SearchView
-        searchView?.isSubmitButtonEnabled = true
         searchView?.setOnQueryTextListener(this)
         super.onCreateOptionsMenu(menu, inflater)
     }

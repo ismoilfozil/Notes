@@ -54,7 +54,6 @@ class TrashScreen : Fragment(R.layout.screen_trash) , SearchView.OnQueryTextList
 
         val search = menu.findItem(R.id.searchNote)
         val searchView = search?.actionView as? androidx.appcompat.widget.SearchView
-        searchView?.isSubmitButtonEnabled = true
         searchView?.setOnQueryTextListener(this)
         super.onCreateOptionsMenu(menu, inflater)
     }
@@ -66,8 +65,6 @@ class TrashScreen : Fragment(R.layout.screen_trash) , SearchView.OnQueryTextList
                 if (adapter.currentList.isNotEmpty()) { showDialog() }
                 true
             }
-
-
             else -> super.onOptionsItemSelected(item)
         }
     }
